@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+message Person {
+    int64 person_no = 1;
+    string person_id = 2;
+    string person_name = 3;
+    string person_position = 4;
+    string person_mail = 5;
+    string person_telephone = 6;
+    string person_password = 7;
+}
+
+message PersonNo {
+    int64 person_no = 1;
+}
+
+message PersonID {
+    string person_id = 1;
+}
+
+message PersonList {
+    repeated Person list = 1;
+}
+
+import "google/protobuf/empty.proto";
+
+
+service Persons {
+    rpc GetPersonByID(PersonID) returns (Person) {}
+}
