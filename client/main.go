@@ -12,6 +12,7 @@ func main() {
 	mwFunc := new(middleware.MiddlewareFunc)
 
 	customMux.RegisterMiddleware(mwFunc.CORS)
+	customMux.RegisterMiddleware(middleware.MiddlewareJWTAuth)
 
 	user.NewUserHandler(customMux)
 

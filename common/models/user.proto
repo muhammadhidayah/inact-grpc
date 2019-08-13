@@ -27,4 +27,8 @@ import "google/protobuf/empty.proto";
 
 service Persons {
     rpc GetPersonByID(PersonID) returns (Person) {}
+    rpc UpdatePerson(Person) returns (google.protobuf.Empty) {}
+    rpc AddPerson(Person) returns (google.protobuf.Empty) {}
+    rpc ListPerson(google.protobuf.Empty) returns (PersonList) {}
+    rpc DeletePerson(PersonID) returns (google.protobuf.Empty) {}
 }

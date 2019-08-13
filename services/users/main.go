@@ -7,6 +7,7 @@ import (
 	"log"
 	"net"
 
+	"github.com/golang/protobuf/ptypes/empty"
 	_ "github.com/lib/pq"
 	"github.com/muhammadhidayah/inact-grpc/common/config"
 	_models "github.com/muhammadhidayah/inact-grpc/common/models"
@@ -59,6 +60,28 @@ func (UserServer) GetPersonByID(ctx context.Context, param *_models.PersonID) (*
 	}
 
 	return res, nil
+}
+
+func (UserServer) AddPerson(ctx context.Context, person *_models.Person) (*empty.Empty, error) {
+	err := userUseCase.AddPerson(person)
+	return new(empty.Empty), err
+}
+
+func (UserServer) UpdatePerson(ctx context.Context, person *_models.Person) (*empty.Empty, error) {
+	err := userUseCase.UpdatePerson(person)
+	return new(empty.Empty), err
+}
+
+func (UserServer) ListPerson(ctx context.Context, void *empty.Empty) (*_models.PersonList, error) {
+	res, err := userUseCase.GetAllUser()
+	return res, err
+}
+
+func (UserServer) DeletePerson(ctx context.Context, param *_models.PersonID) (*empty.Empty, error) {
+	person_id := param.PersonId
+	err := userUseCase.DeletePersonByID(person_id)
+
+	return new(empty.Empty), err
 }
 
 func main() {
